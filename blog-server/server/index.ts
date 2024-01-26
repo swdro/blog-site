@@ -5,6 +5,7 @@ const env = dotenv.config({ path: '../.env' });
 
 // routes
 import postRouter from './routes/post';
+import tagsRouter from './routes/tags';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(postRouter);
+app.use(tagsRouter);
 
 app.get('/', (req, res) => {
     res.send("hello world");

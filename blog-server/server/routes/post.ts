@@ -1,7 +1,6 @@
 import express from 'express';
-import connectBusboy from 'connect-busboy';
 import multer from 'multer';
-import { postController } from '../controllers/post/getPostController';
+import { postBlogpostController } from '../controllers/post/postBlogpostController';
 
 const router = express.Router();
 
@@ -9,6 +8,6 @@ const router = express.Router();
 //router.post('/post', express.raw({type: '*/*'}), postController);
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-router.post('/post', upload.single('file'), postController);
+router.post('/post', upload.single('file'), postBlogpostController);
 
 export default router;

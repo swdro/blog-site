@@ -7,8 +7,11 @@ const API = axios.create({
 });
 
 // posts 
-//export const postBlogApi = (file: ) => API.post("/post", formData, {
-    //headers: {
-        //'Content-Type': 'multipart/form-data'
-    //}
-//});
+export const postBlogApi = (formData: FormData) => API.post("/post", formData, {
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+});
+
+// tags
+export const getTagsApi = () => API.get("/tags");

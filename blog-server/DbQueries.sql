@@ -1,6 +1,6 @@
 create table if not exists posts (
     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-    title text NOT NULL,
+    title text NOT NULL UNIQUE,
     created_dt timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

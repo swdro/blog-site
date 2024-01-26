@@ -1,13 +1,17 @@
-import { BaseSyntheticEvent, SyntheticEvent } from "react";
-import { BASE_URL } from "../api/apiUrls";
-import axios from "axios";
+import { BaseSyntheticEvent, useState, useEffect } from "react";
+import { postBlogApi, getTagsApi } from "../api/apiUrls";
 
 function Upload() {
+    const tags = useState({});
 
-    function handleSubmit(data: BaseSyntheticEvent) {
+    useEffect(() => {
+        getTagsApi().then((res) => {
+            console.log(res);
+        });
+    })
+
+    async function handleSubmit(data: BaseSyntheticEvent) {
         data.preventDefault();
-
-        // create date object, json, and blob
         const createdDate = '01/27/2023';
 
         // grab file
@@ -18,17 +22,19 @@ function Upload() {
         formData.append('createdDate', createdDate);
         formData.append('file', file);
 
-        console.log("formData: ", formData);
-
-        axios({
-            method: 'post',
-            url: `${BASE_URL}/post`,
-            data: formData,
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        try {
+            const response = await postBlogApi(formData);
+            if (response.status === 200) {
+                console.log("Created post!"); 
+                // show success message
             }
-        })
-
+            if (response.status === 500) {
+                console.log("Error");
+                // indicate error
+            }
+        } catch (e: any) {
+            console.log("error catch: ", e);
+        }
     }
 
     return (
