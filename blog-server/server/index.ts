@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+const env = dotenv.config({ path: '../.env' });
 
 // routes
 import postRouter from './routes/post';
@@ -8,7 +9,6 @@ import postRouter from './routes/post';
 const app = express();
 
 // init variables
-const env = dotenv.config({ path: '../.env' });
 const PORT = process.env.SERVER_PORT;
 
 //app.use(busboy());
