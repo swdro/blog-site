@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 // routes
 import postRouter from './routes/post';
@@ -10,6 +11,10 @@ const app = express();
 const env = dotenv.config({ path: '../.env' });
 const PORT = process.env.SERVER_PORT;
 
+//app.use(busboy());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(postRouter);
 
 app.get('/', (req, res) => {
