@@ -5,9 +5,6 @@ export async function getTags() {
         const getTags = await pool.query(
             "SELECT * FROM tags"
         );
-
-        console.log(getTags);
-
         const tags = getTags.rows;
         return tags;
     } catch(e) {

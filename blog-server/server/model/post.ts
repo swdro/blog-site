@@ -13,3 +13,19 @@ export async function createPost(title: string, createdDate: Date) {
         throw e;
     }
 }
+
+export async function createPostTags(tags: string[], postId: string) {
+    try {
+        for (const tagId of tags) {
+            const createPostTags = await pool.query(
+                "INSERT INTO post_tags (tag_id, post_id) values ($1, $2) RETURNING *",
+                [tagId, postId]
+            );
+        }
+    } catch(e) {
+        console.log("failed to create post in database...");
+        throw e;
+    }
+}
+
+

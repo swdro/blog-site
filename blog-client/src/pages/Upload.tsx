@@ -1,24 +1,72 @@
 import { BaseSyntheticEvent, useState, useEffect } from "react";
 import { postBlogApi, getTagsApi } from "../api/apiUrls";
 
+//type TagType = { 
+    //[key: string]: { 
+        //tagName: string, 
+        //isSelected: boolean 
+    //} 
+//}; 
+
+type TagType = { 
+    tagId: string,
+    tagName: string, 
+    isSelected: boolean 
+} 
+
 function Upload() {
-    const tags = useState({});
+    const [tags, setTags] = useState<TagType[]>([]);
+    const [createdDate, setCreatedDate] = useState('');
 
     useEffect(() => {
         getTagsApi().then((res) => {
             console.log(res);
+            let tagsTemp: TagType[] = [];
+            for (let tagData of res.data) {
+                let tagId = tagData.id;
+                let tagName = tagData.tag_name;
+                tagsTemp.push({
+                    tagId,
+                    tagName,
+                    isSelected: false
+                })
+            }
+            setTags(tagsTemp);
         });
-    })
+    }, []);
 
-    async function handleSubmit(data: BaseSyntheticEvent) {
-        data.preventDefault();
-        const createdDate = '01/27/2023';
+    function isDateValid(dateStr: string) {
+        if (!isNaN(Date.parse(dateStr))) {
+            return true;
+        }
+        return false;
+    }
+
+    async function handleSubmit(e: BaseSyntheticEvent) {
+        e.preventDefault();
 
         // grab file
-        const file = data.target.elements[0].files[0];
+        const files = e.target.elements[0].files;
+        if (files.length == 0) {
+            console.log("Please select a file from your computer");
+            return;
+        }
+        const file = files[0];
 
-        // create formData and append blob and file
+        // check date
+        if (!isDateValid(createdDate)) {
+            console.log("date format error");
+            return;
+        }
+
+        // get only necessary tag data
+        const tagsData = tags
+            .filter((tag) => tag.isSelected)
+            .map((tag: TagType) => tag.tagId);
+
+        // create formData and append date, tags, and file
         const formData = new FormData();
+        formData.append('tagsData', JSON.stringify(tagsData));
         formData.append('createdDate', createdDate);
         formData.append('file', file);
 
@@ -37,12 +85,37 @@ function Upload() {
         }
     }
 
+    function handleTagClick(key: string) {
+        console.log(key);
+        setTags(tags.map((tag: TagType) =>
+            (tag.tagId === key) ? {
+                ...tag,
+                isSelected: !tag.isSelected
+            } : tag
+        ));
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <input name="file" type="file" multiple />
                 <button type="submit">Upload</button>
             </form>
+
+            <div>
+                <div>Created Date</div>
+                <input onChange={(e) => setCreatedDate(e.target.value)} value={createdDate} />
+            </div>
+
+            <div>
+                {tags.map((tag) => {
+                    return (
+                        <button key={tag.tagId} onClick={() => handleTagClick(tag.tagId)} style={{ backgroundColor: tag.isSelected ? 'green' : 'white' }}>
+                            {tag.tagName}
+                        </button>
+                    )
+                })}
+            </div>
 
             {/* <form action={`${BASE_URL}/post`} method="post" encType="multipart/form-data">
                 <input name="file" type="file" multiple />

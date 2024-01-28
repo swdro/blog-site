@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
-import { createPost } from '../../model/post';
+import { createPost, createPostTags } from '../../model/post';
 
 export async function postBlogpostController(req: Request, res: Response) {
     try {
         // make sure data was uploaded successfully
         if (!req.body) {
-            res.send('metadata data not sent');
+            res.status(422).send('metadata data not sent');
             return;
         }
         if (!req.file) {
-            res.send('file failed to upload');
+            res.status(422).send('file failed to upload');
             return;
         }
 
@@ -21,14 +21,20 @@ export async function postBlogpostController(req: Request, res: Response) {
         const fileBuffer = file.buffer;
         const formData = req.body;
         const createdDate = new Date(formData.createdDate);
+        const tagsData = JSON.parse(formData.tagsData);
 
         console.log(formData);
         console.log(filename);
         console.log(createdDate);
+        console.log(tagsData);
 
         // insert post data into db
         const postId = await createPost(filename, createdDate);
         console.log("postId: ", postId);
+
+        // insert post/tag relationships
+        await createPostTags(tagsData, postId);
+        console.log("tags created for post");
 
         // create directory with uuid as directory name 
         const directoryPath = path.join(__dirname, '../../../blogposts', postId);
