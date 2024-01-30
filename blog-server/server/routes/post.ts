@@ -1,6 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 import { postBlogpostController } from '../controllers/post/postBlogpostController';
+import { getPostsController } from '../controllers/post/getPostsController';
 
 const router = express.Router();
 
@@ -9,5 +10,6 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 router.post('/post', upload.single('file'), postBlogpostController);
+router.get('/posts', getPostsController);
 
 export default router;
