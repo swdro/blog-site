@@ -12,7 +12,8 @@ export const postBlogApi = (formData: FormData) => API.post("/post", formData, {
         'Content-Type': 'multipart/form-data'
     }
 });
-export const getPosts = (pageData: { limit: number, page: number }) => API.get("/posts", { params: pageData });
+export const getPostsApi = (pageData: { limit: number, page: number }) => API.get("/posts", { params: pageData });
+export const getPostApi = (postId: string) => API.get("/post", { params: { postId } })
 
 // tags
 export const getTagsApi = () => API.get("/tags");

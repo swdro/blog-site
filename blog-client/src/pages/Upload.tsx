@@ -99,7 +99,7 @@ function Upload() {
         <div>
             <form onSubmit={handleSubmit}>
                 <input name="file" type="file" multiple />
-                <button type="submit">Upload</button>
+                <button type="submit" className="bg-white">Upload</button>
             </form>
 
             <div>
@@ -107,10 +107,15 @@ function Upload() {
                 <input onChange={(e) => setCreatedDate(e.target.value)} value={createdDate} />
             </div>
 
-            <div>
+            <div className="flex flex-wrap gap-5 mt-10">
                 {tags.map((tag) => {
                     return (
-                        <button key={tag.tagId} onClick={() => handleTagClick(tag.tagId)} style={{ backgroundColor: tag.isSelected ? 'green' : 'white' }}>
+                        <button 
+                            key={tag.tagId} 
+                            onClick={() => handleTagClick(tag.tagId)} 
+                            style={{ backgroundColor: tag.isSelected ? 'green' : 'white' }}
+                            className={`bg${tag.isSelected ? 'green' : 'white'} rounded-lg px-2`}
+                        >
                             {tag.tagName}
                         </button>
                     )

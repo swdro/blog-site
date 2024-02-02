@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getPosts } from '../../model/post';
 
-export async function getPostsController(req: Request, res: Response) {
+export async function getBlogpostsController(req: Request, res: Response) {
     try {
         // make sure data was uploaded successfully
         const pageData = req.query;

@@ -43,4 +43,17 @@ export async function getPosts(limit: number, page: number) {
     }
 }
 
+export async function getPost(postId: string) {
+    try {
+        const getPost = await pool.query(
+            "SELECT * FROM posts WHERE id = $1 ",
+            [postId]
+        );
+        const post = getPost.rows[0];
+        return post;
+    } catch(e) {
+        console.log("failed to get posts...");
+        throw e;
+    }
+}
 
