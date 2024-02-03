@@ -1,9 +1,10 @@
 import axios from 'axios';
 console.log("meta.env: ", import.meta.env);
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 const API = axios.create({ 
     baseURL: `${BASE_URL}`,
+    withCredentials: true
 });
 
 // posts 
@@ -17,3 +18,6 @@ export const getPostApi = (postId: string) => API.get("/post", { params: { postI
 
 // tags
 export const getTagsApi = () => API.get("/tags");
+
+// login
+export const loginApi = (credentials: { username: string, password: string }) => API.post("/login", credentials);

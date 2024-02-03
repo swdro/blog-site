@@ -26,9 +26,9 @@ export function Home() {
     }
 
     return (
-        <div className="p-48 flex justify-center">
-            <div className="w-3/5">
-                <div className="text-2xl pb-16 flex items-center">
+        <div className="p-8 md:p-36 lg:p-48 flex justify-center">
+            <div className="md:w-3/5">
+                <div className="text-xl md:text-2xl pb-16 flex items-center">
                     <div className="bg-gradient-to-r from-black to-black/80 bg-clip-text text-transparent">
                         The Software Blog 
                     </div>
@@ -44,7 +44,7 @@ export function Home() {
                         {posts.map((post: PostType) => {
                             return (
                                 <li key={post.id}  className=" list-none">
-                                    <div className="flex items-center gap-5">
+                                    <div className="flex items-center gap-5 text-sm md:text-base">
                                         <span className="text-secondary font-medium  font-['arial'] flex-none flex items-end">
                                             {formatDate(post.created_dt)}
                                         </span>

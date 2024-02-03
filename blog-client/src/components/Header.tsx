@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 export function Header() {
     return (
         <>
-            <div className="px-48 bg-secondary rounded-b-l flex justify-center ">
+            <div className="px-8 md:px-36 lg:px-48 bg-secondary rounded-b-l flex justify-center ">
                 <div className="flex justify-between w-3/5">
                     <ul className=" text-background list-none flex gap-10">
                         <li><Link to={"/"}>Home</Link></li>
-                        <li><Link to={"/now"}>Now</Link></li>
+                        {/* <li><Link to={"/now"}>Now</Link></li> */}
                     </ul>
                     <div className="flex items-center">
                         <a href="https://github.com/swdro" target="_blank">

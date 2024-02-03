@@ -36,3 +36,11 @@ create table if not exists post_tags (
   constraint fk_post_id foreign key (post_id) references posts (id) on delete cascade
 );
 
+create table if not exists users (
+  user_id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  username varchar(50) NOT NULL UNIQUE,
+  password varchar(100) NOT NULL,
+  last_login timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, password) VALUES ('swdro', '<password>');

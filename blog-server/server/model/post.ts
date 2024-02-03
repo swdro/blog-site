@@ -32,7 +32,7 @@ export async function getPosts(limit: number, page: number) {
     try {
         const offset = limit * (page - 1);
         const getPosts = await pool.query(
-            "SELECT * FROM posts LIMIT $1 OFFSET $2",
+            "SELECT * FROM posts ORDER BY created_dt DESC LIMIT $1 OFFSET $2",
             [limit, offset]
         );
         const posts = getPosts.rows;

@@ -1,12 +1,6 @@
 import { BaseSyntheticEvent, useState, useEffect } from "react";
 import { postBlogApi, getTagsApi } from "../api/apiUrls";
-
-//type TagType = { 
-    //[key: string]: { 
-        //tagName: string, 
-        //isSelected: boolean 
-    //} 
-//}; 
+import { Navigate, useNavigate } from "react-router-dom";
 
 type TagType = { 
     tagId: string,
@@ -17,6 +11,7 @@ type TagType = {
 function Upload() {
     const [tags, setTags] = useState<TagType[]>([]);
     const [createdDate, setCreatedDate] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         getTagsApi().then((res) => {
@@ -82,6 +77,10 @@ function Upload() {
             }
         } catch (e: any) {
             console.log("error catch: ", e);
+            if (e.response.status === 401) {
+                console.log("unauthorized");
+                navigate('/login');
+            }
         }
     }
 
