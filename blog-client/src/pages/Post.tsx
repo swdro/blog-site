@@ -32,11 +32,11 @@ export function Post() {
     return (
         <div>
             {post && 
-                <div className="px-48 py-20 flex justify-center">
-                    <div className="w-3/5">
-                        <div className="flex gap-5">
+                <div className="p-8 md:p-36 lg:p-48 py-20 flex justify-center">
+                    <div className="md:w-3/5">
+                        <div className="flex flex-col md:flex-row gap-5">
                             <div className="">
-                                <span className="text-secondary">{formatDate(post.createdDate)}</span>
+                                <span className="text-secondary text-base">{formatDate(post.createdDate)}</span>
                             </div>
                             <div>
                                 <div className="flex flex-col gap-3 mb-14">

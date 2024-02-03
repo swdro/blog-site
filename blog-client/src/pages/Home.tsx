@@ -28,7 +28,7 @@ export function Home() {
     return (
         <div className="p-8 md:p-36 lg:p-48 flex justify-center">
             <div className="md:w-3/5">
-                <div className="text-xl md:text-2xl pb-16 flex items-center">
+                <div className="text-xl md:text-2xl md:pb-16 flex items-center">
                     <div className="bg-gradient-to-r from-black to-black/80 bg-clip-text text-transparent">
                         The Software Blog 
                     </div>
@@ -44,15 +44,15 @@ export function Home() {
                         {posts.map((post: PostType) => {
                             return (
                                 <li key={post.id}  className=" list-none">
-                                    <div className="flex items-center gap-5 text-sm md:text-base">
-                                        <span className="text-secondary font-medium  font-['arial'] flex-none flex items-end">
+                                    <div className="flex place-items-start gap-5 w-fit md:text-base flex-auto text-wrap break-words whitespace-normal">
+                                        <span className="text-secondary font-medium text-xs md:text-base  font-['arial'] flex-none flex items-end">
                                             {formatDate(post.created_dt)}
                                         </span>
-                                        <h1 onClick={() => handlePostClick(post.id)} className="text-black/75 text-xl w-fit flex-none cursor-pointer hover:text-black/50 hover:underline transition duration-500 ease-in-out">
-                                            <Link to={`/post/${post.id}`}>
+                                        <div onClick={() => handlePostClick(post.id)} className="text-black/75 text-wrap cursor-pointer hover:text-black/50 hover:underline transition duration-500 ease-in-out">
+                                            <Link to={`/post/${post.id}`} className="">
                                                 &#123;{removeMDFileExt(post.title)}&#125;
                                             </Link>
-                                        </h1>
+                                        </div>
                                     </div>
                                 </li>
                             )
