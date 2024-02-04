@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useState, useEffect } from "react";
 import { postBlogApi, getTagsApi } from "../api/apiUrls";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type TagType = { 
     tagId: string,

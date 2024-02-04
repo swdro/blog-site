@@ -33,7 +33,7 @@ export function Post() {
         <div>
             {post && 
                 <div className="p-8 md:p-36 lg:p-48 py-20 flex justify-center">
-                    <div className="md:w-3/5">
+                    <div className="xl:w-3/5">
                         <div className="flex flex-col md:flex-row gap-5">
                             <div className="">
                                 <span className="text-secondary text-base">{formatDate(post.createdDate)}</span>

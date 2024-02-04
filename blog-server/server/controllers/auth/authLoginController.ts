@@ -2,12 +2,6 @@ import { Request, Response, NextFunction, CookieOptions } from 'express'
 import { loginUser } from '../../model/auth';
 import bcrypt from 'bcrypt';
 
-declare module 'express-session' {
-    interface SessionData {
-        user: string;
-    }
-}
-
 const AuthCookieConfig = {
     //name: "Auth",
     maxAge: 30 * 24 * 3600000, // 30 * 24 hours

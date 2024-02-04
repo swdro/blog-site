@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "start": "sudo nodemon"
+    "start": "sudo nodemon",
+    "build": "tsc",
+    "prod": "pm2 start ./dist/index.js",
+    "prod-stop": "pm2 stop index",
+    "prod-check": "pm2 list"
   },
   "devDependencies": {
     "@types/connect-busboy": "^1.0.3",
@@ -13,7 +17,11 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.6",
+    "bcrypt": "^5.1.1",
     "connect-busboy": "^1.0.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "express": "^4.18.2",

@@ -12,7 +12,7 @@ type PostType = {
 export function Home() {
 
     const [posts, setPosts] = useState([]);
-    const [pageData, setPageData] = useState({ limit: 20, page: 1 });
+    const [pageData] = useState({ limit: 20, page: 1 });
 
     useEffect(() => {
         getPostsApi(pageData).then((res) => {
