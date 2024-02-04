@@ -18,7 +18,7 @@ const app = express();
 // init variables
 const DEV = process.env.NODE_ENV !== 'production';
 const PORT = DEV ? process.env.SERVER_PORT : 80;
-const CLIENT_URL = DEV ? process.env.CLIENT_URL_DEV : 'http://localhost:80';
+const CLIENT_URL = process.env.CLIENT_URL_DEV;
 const REACT_APP_PATH = String(process.env.REACT_DIST_PATH);
 console.log(DEV);
 console.log(CLIENT_URL);
