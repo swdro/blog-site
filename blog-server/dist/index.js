@@ -19,8 +19,9 @@ const app = (0, express_1.default)();
 // init variables
 const DEV = process.env.NODE_ENV !== 'production';
 const PORT = DEV ? process.env.SERVER_PORT : 80;
-const CLIENT_URL = DEV ? process.env.CLIENT_URL_DEV : 'http://localhost:80';
-const REACT_APP_PATH = console.log(DEV);
+const CLIENT_URL = process.env.CLIENT_URL_DEV;
+const REACT_APP_PATH = String(process.env.REACT_DIST_PATH);
+console.log(DEV);
 console.log(CLIENT_URL);
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
@@ -34,11 +35,12 @@ app.use(authMiddleware_1.default);
 app.use(post_1.default);
 app.use(tags_1.default);
 app.use(auth_1.default);
+console.log(REACT_APP_PATH);
+console.log(path_1.default.join(REACT_APP_PATH, 'index.html'));
+// serve react file
+app.use(express_1.default.static(path_1.default.join(__dirname, REACT_APP_PATH)));
 app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '../../', 'blog-client/dist/index.html'));
-});
-app.get('/', (req, res) => {
-    res.send("hello world");
+    res.sendFile(path_1.default.join(__dirname, REACT_APP_PATH, 'index.html'));
 });
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
