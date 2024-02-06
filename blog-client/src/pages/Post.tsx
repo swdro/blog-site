@@ -52,8 +52,8 @@ export function Post() {
                                         )}
                                     </ul>
                                 </div>
-                                <div className="flex flex-col gap-6">
-                                    <Markdown>{post.markdownString}</Markdown>
+                                <div className="flex flex-col gap-6 [&_pre]:whitespace-pre-wrap [&_p]:inline">
+                                    <Markdown className="">{post.markdownString}</Markdown>
                                 </div>
                             </div>
                         </div>

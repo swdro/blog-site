@@ -15,10 +15,10 @@ export default {
       // primary: '#000000',
       // secondary: '#999999',
       // accent: '#3963E2',
-      background: '#effbf9',
+      background: '#ffffff',
       primary: '#A5A5A5',
       secondary: '#7F7F7F',
-      accent: '#595959',
+      accent: '#3963E2',
       ...colors
     },
     extend: {},
